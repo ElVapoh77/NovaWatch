@@ -1,0 +1,27 @@
+
+[
+    {
+        "name": "CERT-FR",
+        "url": "https://cert.cyber.gouv.fr/avis/feed/",
+        "category": "Cybersécurité",
+        "language": "fr"
+    },
+    {
+        "name": "CERT-FR Alertes",
+        "url": "https://cert.cyber.gouv.fr/alerte/feed/",
+        "category": "Alertes",
+        "language": "fr"
+    },
+    {
+        "name": "IT-Connect",
+        "url": "https://www.it-connect.fr/feed/",
+        "category": "Systèmes et réseaux",
+        "language": "fr"
+    },
+    {
+        "name": "BleepingComputer",
+        "url": "https://www.bleepingcomputer.com/feed/",
+        "category": "Cybersécurité",
+        "language": "en"
+    }
+]

@@ -85,6 +85,14 @@ jobs:
         # le contenu de notre dépôt sur la machine.
         # @v6 désigne la version majeure de cette action.
         uses: actions/checkout@v6
+        
+        with:
+
+          # Récupère la dernière version de la branche main.
+          ref: main
+
+          # 0 : récupère l'intégralité de l'historique Git.
+          fetch-depth: 0
 
       # ======================================================
       # 6. INSTALLATION DE PYTHON

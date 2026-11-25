@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+
+<!--
+============================================================
+NOVAWATCH - Interface principale
+Version : 0.2
+============================================================
+-->
+
+<!-- lang définit la langue principale de l'application. -->
+<html lang="fr">
+
+<head>
+
+    <!-- Encodage permettant l'affichage des accents. -->
+    <meta charset="UTF-8">
+
+    <!--
+    Configuration de l'affichage sur les appareils mobiles.
+
+    width=device-width :
+        Adapte la largeur à celle de l'écran.
+
+    initial-scale=1.0 :
+        Définit le niveau de zoom initial.
+    -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <!-- Description utilisée par les moteurs de recherche. -->
+    <meta name="description"
+          content="NovaWatch - Plateforme de veille technologique
+          et de cybersécurité.">
+
+    <!-- Couleur de l'interface du navigateur mobile. -->
+    <meta name="theme-color" content="#080e19">
+
+    <!-- Titre affiché dans l'onglet du navigateur. -->
+    <title>NovaWatch | Technology Intelligence</title>
+
+    <!--
+    Chargement de la feuille de style CSS.
+
+    rel="stylesheet" : indique le type de ressource.
+    href : chemin relatif vers le fichier CSS.
+    -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!--
+    Chargement du script JavaScript.
+
+    src : chemin du fichier JavaScript.
+    defer : attend la lecture complète du HTML
+            avant d'exécuter le script.
+    -->
+    <script src="assets/js/app.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- =================================================
+         1. EN-TÊTE DE L'APPLICATION
+         ================================================= -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <!-- Radar animé par notre future feuille CSS. -->
+            <div class="radar-logo" aria-hidden="true">
+
+                <div class="radar-circle"></div>
+                <div class="radar-circle"></div>
+                <div class="radar-circle"></div>
+
+                <div class="radar-sweep"></div>
+                <span class="radar-point"></span>
+
+            </div>
+
+            <div class="brand-text">
+
+                <h1>NOVAWATCH</h1>
+
+                <p>Technology Intelligence System</p>
+
+            </div>
+
+        </div>
+
+        <!--
+        Indicateur d'état de l'application.
+
+        id permet au JavaScript de modifier cet élément.
+        -->
+
+        <div class="system-status"
+             id="system-status"
+             role="status">
+
+            <span class="status-dot"></span>
+
+            <span id="status-text">
+                INITIALISATION
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         2. MENU DE NAVIGATION
+         ================================================= -->
+
+    <!--
+    data-view : attribut personnalisé utilisé par JavaScript
+    pour identifier la rubrique sélectionnée.
+    -->
+
+    <nav class="navigation" aria-label="Navigation principale">
+
+        <button type="button"
+                class="nav-button active"
+                data-view="all">
+            Radar
+        </button>
+
+        <button type="button"
+                class="nav-button"
+                data-view="security">
+            Sentinel
+        </button>
+
+        <button type="button"
+                class="nav-button"
+                data-view="network">
+            Network
+        </button>
+
+        <button type="button"
+                class="nav-button"
+                data-view="system">
+            System
+        </button>
+
+        <button type="button"
+                class="nav-button"
+                data-view="favorites">
+            Archives
+        </button>
+
+    </nav>
+
+
+    <!-- =================================================
+         3. CONTENU PRINCIPAL
+         ================================================= -->
+
+    <main class="container">
+
+
+        <!-- =============================================
+             3.1. TABLEAU DE BORD
+             ============================================= -->
+
+        <!--
+        Les compteurs sont initialisés à zéro.
+        JavaScript les actualisera après le chargement
+        du fichier articles.json.
+        -->
+
+        <section class="dashboard"
+                 aria-label="Statistiques de veille">
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    ARTICLES
+                </span>
+
+                <strong class="stat-value"
+                        id="total-articles">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="stat-card alert-card">
+
+                <span class="stat-label">
+                    ALERTES
+                </span>
+
+                <strong class="stat-value"
+                        id="total-alerts">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="stat-card source-card">
+
+                <span class="stat-label">
+                    SOURCES
+                </span>
+
+                <strong class="stat-value"
+                        id="total-sources">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="stat-card favorite-card">
+
+                <span class="stat-label">
+                    FAVORIS
+                </span>
+
+                <strong class="stat-value"
+                        id="total-favorites">
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- =============================================
+             3.2. BARRE DE RECHERCHE ET FILTRES
+             ============================================= -->
+
+        <section class="toolbar"
+                 aria-label="Recherche et filtres">
+
+            <!--
+            type="search" : champ dédié à la recherche.
+            placeholder : texte affiché lorsque le champ
+                          est vide.
+            -->
+
+            <input type="search"
+                   id="search-input"
+                   aria-label="Rechercher un article"
+                   placeholder="Rechercher un article...">
+
+
+            <!--
+            Liste déroulante des sources RSS.
+            Les options seront générées par JavaScript.
+            value="all" : aucune source filtrée.
+            -->
+
+            <select id="source-filter"
+                    aria-label="Filtrer par source">
+
+                <option value="all">
+                    Toutes les sources
+                </option>
+
+            </select>
+
+
+            <!-- Filtre des catégories de veille. -->
+
+            <select id="category-filter"
+                    aria-label="Filtrer par catégorie">
+
+                <option value="all">
+                    Toutes les catégories
+                </option>
+
+            </select>
+
+
+            <!-- Filtre de la langue des articles. -->
+
+            <select id="language-filter"
+                    aria-label="Filtrer par langue">
+
+                <option value="all">
+                    Toutes les langues
+                </option>
+
+                <option value="fr">
+                    Français
+                </option>
+
+                <option value="en">
+                    Anglais
+                </option>
+
+            </select>
+
+
+            <!--
+            Le bouton actualisera les données disponibles
+            sur le site, sans déclencher de collecte RSS.
+            -->
+
+            <button type="button"
+                    id="refresh-button"
+                    class="refresh-button">
+
+                Actualiser
+
+            </button>
+
+        </section>
+
+
+        <!-- =============================================
+             3.3. INFORMATIONS SUR LES RÉSULTATS
+             ============================================= -->
+
+        <section class="feed-header">
+
+            <h2 id="feed-title">
+                Radar technologique
+            </h2>
+
+            <!-- Nombre d'articles correspondant aux filtres. -->
+
+            <p id="result-count" role="status">
+                Chargement des articles...
+            </p>
+
+        </section>
+
+
+        <!-- =============================================
+             3.4. AFFICHAGE DES ARTICLES
+             ============================================= -->
+
+        <!--
+        Ce conteneur sera rempli dynamiquement par JavaScript.
+
+        Les articles ne sont pas écrits directement
+        dans le HTML : ils proviennent de data/articles.json.
+        -->
+
+        <section id="articles-container"
+                 class="articles-grid"
+                 aria-label="Articles de veille">
+
+            <div class="loading-message">
+
+                Initialisation du radar NovaWatch...
+
+            </div>
+
+        </section>
+
+
+        <!-- =============================================
+             3.5. PAGINATION
+             ============================================= -->
+
+        <!--
+        Permet d'afficher progressivement les articles
+        pour éviter de charger 1000 cartes simultanément.
+
+        hidden : masque le bouton par défaut.
+        JavaScript l'affichera si nécessaire.
+        -->
+
+        <div class="pagination">
+
+            <button type="button"
+                    id="load-more"
+                    hidden>
+
+                Afficher plus d'articles
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- =================================================
+         4. PIED DE PAGE
+         ================================================= -->
+
+    <footer class="footer">
+
+        <p class="footer-brand">
+            NOVAWATCH — v0.2
+        </p>
+
+        <p>
+            Nous surveillons l'actualité.
+            Absolument rien d'autre.
+        </p>
+
+        <!--
+        Date de collecte la plus récente connue,
+        calculée depuis les articles disponibles.
+        -->
+
+        <p id="last-update">
+            Dernier article collecté : inconnue
+        </p>
+
+        <a href="https://github.com/ElVapoh77/NovaWatch"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            Projet open source — GitHub
+
+        </a>
+
+    </footer>
+
+    <!-- Message affiché lorsque JavaScript est désactivé. -->
+
+    <noscript>
+
+        NovaWatch nécessite JavaScript pour fonctionner.
+
+    </noscript>
+
+</body>
+
+</html>

@@ -1537,3 +1537,49 @@ init();
    Nous surveillons l'actualité.
    Absolument rien d'autre.
    ========================================================== */
+
+/* ==========================================================
+   20. ENREGISTREMENT DU SERVICE WORKER
+   ========================================================== */
+
+// Vérifie que le navigateur prend en charge
+// les Service Workers avant de tenter l'installation.
+
+if ("serviceWorker" in navigator) {
+
+    // Attend le chargement complet de la page.
+    window.addEventListener("load", async () => {
+
+        try {
+
+            // register() installe le Service Worker.
+            //
+            // scope: "./" limite son périmètre
+            // au répertoire de NovaWatch.
+
+            const registration =
+                await navigator.serviceWorker.register(
+                    "./service-worker.js",
+                    {
+                        scope: "./"
+                    }
+                );
+
+            console.info(
+                "[NovaWatch] Service Worker enregistré :",
+                registration.scope
+            );
+
+        } catch (error) {
+
+            // L'application reste utilisable même
+            // si le Service Worker ne peut pas être installé.
+
+            console.error(
+                "[NovaWatch] Erreur Service Worker :",
+                error
+            );
+        }
+    });
+}
+

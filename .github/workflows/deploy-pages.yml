@@ -1,0 +1,166 @@
+
+# ============================================================
+# NOVAWATCH - Publication automatique du site
+# Version : 0.2
+# ============================================================
+
+name: NovaWatch - Pages Deployment
+
+
+# ============================================================
+# 1. DÉCLENCHEURS DU DÉPLOIEMENT
+# ============================================================
+
+on:
+
+  # Déploie le site après une modification de la branche main.
+  push:
+    branches:
+      - main
+
+  # Déploie le site après la fin du collecteur RSS.
+  #
+  # Permet de publier automatiquement les nouveaux articles,
+  # même lorsque le commit est effectué par le robot GitHub.
+  workflow_run:
+    workflows:
+      - "NovaWatch - RSS Collector"
+    types:
+      - completed
+    branches:
+      - main
+
+  # Autorise également un déploiement manuel.
+  workflow_dispatch:
+
+
+# ============================================================
+# 2. AUTORISATIONS
+# ============================================================
+
+permissions:
+
+  # Autorise la lecture des fichiers du dépôt.
+  contents: read
+
+  # Autorise la publication sur GitHub Pages.
+  pages: write
+
+  # Autorise l'authentification sécurisée du déploiement
+  # via un jeton temporaire OIDC (OpenID Connect).
+  id-token: write
+
+
+# ============================================================
+# 3. GESTION DES DÉPLOIEMENTS SIMULTANÉS
+# ============================================================
+
+concurrency:
+
+  # Tous les déploiements appartiennent au même groupe.
+  group: novawatch-pages
+
+  # Ne pas interrompre un déploiement déjà en cours.
+  cancel-in-progress: false
+
+
+# ============================================================
+# 4. TÂCHE DE DÉPLOIEMENT
+# ============================================================
+
+jobs:
+
+  deploy:
+
+    name: Publication de NovaWatch
+
+    # Si le déploiement est déclenché par le collecteur RSS,
+    # vérifie que celui-ci s'est terminé avec succès.
+    #
+    # Les déclenchements manuels et les commits classiques
+    # restent également autorisés.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+
+    # Machine virtuelle temporaire fournie par GitHub.
+    runs-on: ubuntu-latest
+
+    # Durée maximale du déploiement en minutes.
+    timeout-minutes: 10
+
+    environment:
+
+      # Environnement officiel de GitHub Pages.
+      name: github-pages
+
+      # Récupère automatiquement l'adresse du site publié.
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+      # ======================================================
+      # 5. RÉCUPÉRATION DES FICHIERS
+      # ======================================================
+
+      - name: Recuperation du depot
+        uses: actions/checkout@v6
+
+        with:
+
+          # Récupère la dernière version de main,
+          # comprenant les derniers articles collectés.
+          ref: main
+
+
+      # ======================================================
+      # 6. CONFIGURATION DE GITHUB PAGES
+      # ======================================================
+
+      - name: Configuration de GitHub Pages
+        uses: actions/configure-pages@v5
+
+
+      # ======================================================
+      # 7. PRÉPARATION DES FICHIERS DU SITE
+      # ======================================================
+
+      - name: Preparation du site
+
+        run: |
+          # Création du dossier temporaire de publication.
+          mkdir -p _site/data
+
+          # Copie de la page HTML principale.
+          cp index.html _site/
+
+          # Copie des feuilles CSS et scripts JavaScript.
+          cp -r assets _site/
+
+          # Copie des articles collectés.
+          cp data/articles.json _site/data/
+
+
+      # ======================================================
+      # 8. CRÉATION DE L'ARTEFACT
+      # ======================================================
+
+      - name: Creation de l artefact
+        uses: actions/upload-pages-artifact@v3
+
+        with:
+
+          # Dossier contenant uniquement les fichiers
+          # nécessaires au fonctionnement du site.
+          path: "_site"
+
+
+      # ======================================================
+      # 9. PUBLICATION SUR INTERNET
+      # ======================================================
+
+      - name: Deploiement de NovaWatch
+
+        # Identifiant utilisé pour récupérer l'URL du site.
+        id: deployment
+
+        # Action officielle de publication GitHub Pages.
+        uses: actions/deploy-pages@v4

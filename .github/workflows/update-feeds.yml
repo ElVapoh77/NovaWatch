@@ -1,0 +1,162 @@
+
+# ============================================================
+# NOVAWATCH - Automatisation de la collecte RSS
+# Version : 0.1
+# ============================================================
+
+# Nom du workflow affiché dans l'onglet Actions de GitHub.
+name: NovaWatch - RSS Collector
+
+# ============================================================
+# 1. DÉCLENCHEURS
+# ============================================================
+
+on:
+
+  # Exécution automatique selon une planification CRON.
+  schedule:
+
+    # Syntaxe CRON :
+    # minute heure jour mois jour-de-la-semaine
+    #
+    # 15 : à la 15e minute.
+    # *  : toutes les valeurs possibles.
+    #
+    # Exécution toutes les heures à XX:15.
+    # Les horaires sont exprimés en UTC.
+    - cron: "15 * * * *"
+
+  # Autorise le lancement manuel depuis GitHub.
+  workflow_dispatch:
+
+# ============================================================
+# 2. AUTORISATIONS
+# ============================================================
+
+permissions:
+
+  # Autorise le workflow à lire et modifier
+  # les fichiers du dépôt GitHub.
+  #
+  # Nécessaire pour enregistrer articles.json.
+  contents: write
+
+# ============================================================
+# 3. GESTION DES EXÉCUTIONS SIMULTANÉES
+# ============================================================
+
+concurrency:
+
+  # Identifiant du groupe d'exécution.
+  group: novawatch-collector
+
+  # false : ne pas interrompre une collecte en cours
+  # lorsqu'une nouvelle collecte est demandée.
+  cancel-in-progress: false
+
+# ============================================================
+# 4. CONFIGURATION DE L'ENVIRONNEMENT
+# ============================================================
+
+jobs:
+
+  # Identifiant de la tâche.
+  collect-rss:
+
+    # Nom de la tâche affiché dans GitHub Actions.
+    name: Collecte des flux RSS
+
+    # Machine Linux temporaire fournie par GitHub.
+    runs-on: ubuntu-latest
+
+    # Durée maximale d'exécution en minutes.
+    # Évite de laisser une tâche bloquée indéfiniment.
+    timeout-minutes: 10
+
+    steps:
+
+      # ======================================================
+      # 5. RÉCUPÉRATION DU DÉPÔT
+      # ======================================================
+
+      - name: Recuperation du depot
+
+        # Action officielle permettant de récupérer
+        # le contenu de notre dépôt sur la machine.
+        # @v6 désigne la version majeure de cette action.
+        uses: actions/checkout@v6
+
+      # ======================================================
+      # 6. INSTALLATION DE PYTHON
+      # ======================================================
+
+      - name: Installation de Python
+
+        # Action officielle de configuration de Python.
+        uses: actions/setup-python@v6
+
+        with:
+
+          # Version de Python utilisée par NovaWatch.
+          # GitHub sélectionnera une version 3.12.x.
+          python-version: "3.12"
+
+          # Active le cache des dépendances Python.
+          # Évite certains téléchargements répétitifs.
+          cache: "pip"
+
+      # ======================================================
+      # 7. INSTALLATION DES DÉPENDANCES
+      # ======================================================
+
+      - name: Installation des dependances
+
+        # run permet d'exécuter des commandes shell.
+        #
+        # -m : exécute pip comme module Python.
+        # -r : lit les dépendances depuis un fichier.
+        #
+        # Le caractère | permet d'écrire plusieurs
+        # commandes sur plusieurs lignes.
+        run: |
+          python -m pip install -r requirements.txt
+
+      # ======================================================
+      # 8. EXÉCUTION DU COLLECTEUR
+      # ======================================================
+
+      - name: Execution de NovaWatch
+
+        # Lance notre script Python.
+        # Le fichier articles.json sera créé ou actualisé.
+        run: |
+          python scripts/fetch_rss.py
+
+      # ======================================================
+      # 9. ENREGISTREMENT DES ARTICLES SUR GITHUB
+      # ======================================================
+
+      - name: Enregistrement des articles
+
+        run: |
+          # Configuration de l'identité du robot GitHub.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Ajoute le fichier JSON à la zone de préparation.
+          git add data/articles.json
+
+          # --cached : examine les modifications préparées.
+          # --quiet : retourne un code sans afficher le détail.
+          #
+          # Si aucune modification n'est détectée,
+          # aucun commit n'est créé.
+          if git diff --cached --quiet; then
+            echo "Aucun nouvel article."
+          else
+            # Création du commit automatique.
+            git commit -m "chore: update RSS articles"
+
+            # Envoi des modifications vers GitHub.
+            git push
+          fi

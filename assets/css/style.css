@@ -1,0 +1,1315 @@
+
+/* ==========================================================
+   NOVAWATCH - Feuille de style principale
+   Version : 0.2
+
+   Identite visuelle :
+   - Centre de supervision technologique.
+   - Theme sombre bleu nuit.
+   - Accents cyan.
+   - Radar anime.
+   - Interface responsive.
+   ========================================================== */
+
+
+/* ==========================================================
+   1. VARIABLES GLOBALES
+   ========================================================== */
+
+/*
+   :root represente la racine du document HTML.
+
+   Les variables CSS commencent par deux tirets (--).
+   Elles permettent de centraliser la configuration graphique.
+
+   Exemple :
+   color: var(--accent);
+
+   Modifier une variable ici actualisera automatiquement
+   tous les elements qui l'utilisent.
+*/
+
+:root {
+
+    /* Couleurs principales */
+    --background: #080e19;
+    --surface: #111e30;
+    --surface-hover: #17283e;
+    --border: #263449;
+
+    /* Couleurs du texte */
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #8494aa;
+
+    /* Couleurs fonctionnelles */
+    --accent: #22d3ee;
+    --success: #4ade80;
+    --danger: #f87171;
+    --warning: #fbbf24;
+    --favorite: #a78bfa;
+
+    /* Polices locales : aucune dependance externe */
+    --font-main: "Segoe UI", Arial, sans-serif;
+    --font-tech: Consolas, "Courier New", monospace;
+
+    /* Dimensions */
+    --max-width: 1440px;
+    --radius: 12px;
+    --gap: 20px;
+
+    /* Duree des transitions graphiques */
+    --transition: 0.2s ease;
+
+    /* Ombre standard des cartes */
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+    /* Halo lumineux cyan */
+    --glow: 0 0 20px rgba(34, 211, 238, 0.15);
+
+    /* Indique au navigateur que le site est sombre */
+    color-scheme: dark;
+}
+
+
+/* ==========================================================
+   2. REINITIALISATION DES STYLES
+   ========================================================== */
+
+/*
+   Le selecteur * cible tous les elements HTML.
+
+   box-sizing: border-box :
+   inclut les bordures et espacements internes
+   dans les dimensions d'un element.
+*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    /* Supprime la marge ajoutee par le navigateur */
+    margin: 0;
+
+    /* Hauteur minimale : 100 % de la hauteur de l'ecran */
+    min-height: 100vh;
+
+    font-family: var(--font-main);
+    color: var(--text);
+    background-color: var(--background);
+
+    /*
+       Halo lumineux en haut du site.
+       transparent permet une disparition progressive.
+    */
+    background-image:
+        radial-gradient(
+            ellipse at top,
+            rgba(34, 211, 238, 0.06),
+            transparent 55%
+        );
+
+    line-height: 1.6;
+}
+
+/* Uniformisation des titres et paragraphes */
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+/* Uniformisation des liens */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Les formulaires utilisent la police du site */
+button,
+input,
+select {
+    font: inherit;
+}
+
+/* Curseur en forme de main sur les boutons */
+button {
+    cursor: pointer;
+}
+
+/* Accessibilite : contour visible au clavier */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+/* Garantit que l'attribut HTML hidden reste prioritaire */
+[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================================
+   3. EN-TETE PRINCIPAL
+   ========================================================== */
+
+.header {
+
+    /*
+       Flexbox permet d'aligner les elements
+       horizontalement dans un conteneur.
+    */
+    display: flex;
+
+    /* Alignement vertical au centre */
+    align-items: center;
+
+    /* Repartition aux extremites du conteneur */
+    justify-content: space-between;
+
+    gap: 20px;
+
+    /* Espacement interieur : vertical puis horizontal */
+    padding: 25px 40px;
+
+    background: rgba(8, 14, 25, 0.95);
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* Conteneur du radar et du nom NovaWatch */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+}
+
+
+/* Titre principal */
+
+.brand-text h1 {
+
+    font-family: var(--font-tech);
+
+    /*
+       clamp(minimum, valeur adaptable, maximum)
+       adapte automatiquement la taille a l'ecran.
+    */
+    font-size: clamp(1.4rem, 3vw, 2rem);
+
+    font-weight: 700;
+
+    /* Espacement entre les lettres */
+    letter-spacing: 4px;
+
+    color: var(--accent);
+
+    /* Halo lumineux autour du texte */
+    text-shadow: 0 0 18px rgba(34, 211, 238, 0.35);
+}
+
+
+/* Sous-titre */
+
+.brand-text p {
+    font-family: var(--font-tech);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   4. LOGO RADAR ANIME
+   ========================================================== */
+
+.radar-logo {
+
+    /* Les elements internes seront positionnes relativement
+       a ce conteneur. */
+    position: relative;
+
+    width: 64px;
+    height: 64px;
+
+    /* Empeche Flexbox de reduire le logo */
+    flex-shrink: 0;
+
+    /* 50 % transforme le carre en cercle */
+    border-radius: 50%;
+
+    border: 1px solid rgba(34, 211, 238, 0.6);
+
+    background: rgba(34, 211, 238, 0.04);
+
+    /* Masque les elements depassant du cercle */
+    overflow: hidden;
+
+    box-shadow: var(--glow);
+}
+
+
+/* Cercles concentriques du radar */
+
+.radar-circle {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    /*
+       Centre precisement l'element en compensant
+       la moitie de sa largeur et de sa hauteur.
+    */
+    transform: translate(-50%, -50%);
+
+    border: 1px solid rgba(34, 211, 238, 0.35);
+    border-radius: 50%;
+}
+
+
+/* Dimensions des trois cercles */
+
+.radar-circle:nth-child(1) {
+    width: 30%;
+    height: 30%;
+}
+
+.radar-circle:nth-child(2) {
+    width: 60%;
+    height: 60%;
+}
+
+.radar-circle:nth-child(3) {
+    width: 90%;
+    height: 90%;
+}
+
+
+/* Axes horizontaux et verticaux du radar */
+
+.radar-logo::before,
+.radar-logo::after {
+
+    content: "";
+    position: absolute;
+    background: rgba(34, 211, 238, 0.2);
+}
+
+.radar-logo::before {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+}
+
+.radar-logo::after {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+}
+
+
+/* Faisceau rotatif */
+
+.radar-sweep {
+
+    position: absolute;
+
+    /* inset: 0 equivaut a top/right/bottom/left: 0 */
+    inset: 0;
+
+    /*
+       conic-gradient cree un degrade circulaire.
+       Il represente le faisceau du radar.
+    */
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 270deg,
+        rgba(34, 211, 238, 0.35) 360deg
+    );
+
+    /*
+       radar-rotation : nom de l'animation.
+       4s             : duree d'une rotation.
+       linear         : vitesse constante.
+       infinite       : repetition permanente.
+    */
+    animation: radar-rotation 4s linear infinite;
+}
+
+
+/* Point lumineux detecte par le radar */
+
+.radar-point {
+    position: absolute;
+    top: 25%;
+    left: 65%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: radar-blink 2s ease-in-out infinite;
+}
+
+
+/* Definition de l'animation de rotation */
+
+@keyframes radar-rotation {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Definition de l'animation du point lumineux */
+
+@keyframes radar-blink {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================================
+   5. INDICATEUR D'ETAT DU SYSTEME
+   ========================================================== */
+
+.system-status {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 8px 14px;
+
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+
+    color: var(--warning);
+
+    border: 1px solid currentColor;
+    border-radius: 6px;
+
+    white-space: nowrap;
+}
+
+
+/*
+   Classes que JavaScript ajoutera selon
+   le resultat du chargement des donnees.
+*/
+
+.system-status.online {
+    color: var(--success);
+}
+
+.system-status.offline {
+    color: var(--danger);
+}
+
+.system-status.loading {
+    color: var(--warning);
+}
+
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    /* Reprend la couleur du texte du parent */
+    background: currentColor;
+
+    box-shadow: 0 0 8px currentColor;
+}
+
+
+/* Animation du voyant lorsque les donnees sont disponibles */
+
+.system-status.online .status-dot {
+    animation: status-pulse 2s infinite;
+}
+
+
+@keyframes status-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+
+/* ==========================================================
+   6. MENU DE NAVIGATION
+   ========================================================== */
+
+.navigation {
+
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    padding: 14px 20px;
+
+    background: rgba(17, 30, 48, 0.65);
+
+    border-bottom: 1px solid var(--border);
+
+    /* Autorise le defilement horizontal sur mobile */
+    overflow-x: auto;
+}
+
+
+.nav-button {
+
+    padding: 10px 24px;
+
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    background: transparent;
+    color: var(--text-secondary);
+
+    font-family: var(--font-tech);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    transition: var(--transition);
+}
+
+
+/* Etat lors du survol */
+
+.nav-button:hover {
+    color: var(--accent);
+    background: var(--surface-hover);
+}
+
+
+/* Rubrique actuellement selectionnee */
+
+.nav-button.active {
+
+    color: var(--accent);
+
+    background: rgba(34, 211, 238, 0.08);
+    border-color: rgba(34, 211, 238, 0.4);
+
+    box-shadow: var(--glow);
+}
+
+
+/* ==========================================================
+   7. CONTENEUR PRINCIPAL
+   ========================================================== */
+
+.container {
+
+    /* Limite la largeur sur les grands ecrans */
+    max-width: var(--max-width);
+
+    /* Centre horizontalement le conteneur */
+    margin: 0 auto;
+
+    padding: 30px;
+}
+
+
+/* ==========================================================
+   8. TABLEAU DE BORD
+   ========================================================== */
+
+.dashboard {
+
+    /* CSS Grid permet de creer une grille de colonnes */
+    display: grid;
+
+    /*
+       repeat(4, minmax(0, 1fr)) :
+       cree quatre colonnes de largeur identique.
+
+       1fr represente une fraction de l'espace disponible.
+    */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: var(--gap);
+    margin-bottom: 30px;
+}
+
+
+.stat-card {
+
+    /* Couleur par defaut du compteur */
+    --stat-color: var(--accent);
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 22px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--stat-color);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    transition: var(--transition);
+}
+
+
+/* Personnalisation des couleurs des compteurs */
+
+.alert-card {
+    --stat-color: var(--danger);
+}
+
+.source-card {
+    --stat-color: var(--success);
+}
+
+.favorite-card {
+    --stat-color: var(--favorite);
+}
+
+
+/* Effet lumineux decoratif */
+
+.stat-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: -35px;
+    top: -35px;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+    background: var(--stat-color);
+
+    opacity: 0.04;
+
+    pointer-events: none;
+}
+
+
+.stat-card:hover {
+
+    /* Deplace legerement la carte vers le haut */
+    transform: translateY(-3px);
+
+    border-color: var(--stat-color);
+}
+
+
+.stat-label {
+
+    color: var(--text-secondary);
+
+    font-family: var(--font-tech);
+    font-size: 0.78rem;
+
+    letter-spacing: 2px;
+}
+
+
+.stat-value {
+
+    color: var(--stat-color);
+
+    font-family: var(--font-tech);
+    font-size: 2.2rem;
+    font-weight: bold;
+
+    /* Chiffres de largeur constante */
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ==========================================================
+   9. BARRE DE RECHERCHE ET FILTRES
+   ========================================================== */
+
+.toolbar {
+
+    display: grid;
+
+    /*
+       Le champ de recherche dispose de deux fractions.
+       Les autres elements prennent la place necessaire.
+    */
+    grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(120px, 1fr)) auto;
+
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+
+.toolbar input,
+.toolbar select {
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 12px 15px;
+
+    color: var(--text);
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    transition: var(--transition);
+}
+
+
+.toolbar input::placeholder {
+    color: var(--text-muted);
+}
+
+
+/* Etat lorsque le champ est selectionne */
+
+.toolbar input:focus,
+.toolbar select:focus {
+
+    border-color: var(--accent);
+    box-shadow: var(--glow);
+}
+
+
+.refresh-button {
+
+    padding: 12px 20px;
+
+    color: var(--accent);
+    background: rgba(34, 211, 238, 0.08);
+
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    border-radius: 8px;
+
+    transition: var(--transition);
+}
+
+
+.refresh-button:hover {
+    color: var(--background);
+    background: var(--accent);
+}
+
+
+/* Bouton desactive pendant un chargement */
+
+.refresh-button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+
+/* ==========================================================
+   10. EN-TETE DU FIL D'ACTUALITES
+   ========================================================== */
+
+.feed-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.feed-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+
+#result-count {
+
+    color: var(--text-secondary);
+
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+}
+
+
+/* ==========================================================
+   11. GRILLE DES ARTICLES
+   ========================================================== */
+
+.articles-grid {
+
+    display: grid;
+
+    /*
+       auto-fill cree autant de colonnes que possible.
+
+       Chaque colonne mesure au minimum 340px,
+       sauf sur les ecrans plus petits.
+
+       1fr permet aux colonnes d'occuper equitablement
+       l'espace disponible.
+    */
+    grid-template-columns:
+        repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+
+    gap: var(--gap);
+}
+
+
+/* ==========================================================
+   12. CARTES DES ARTICLES
+   ========================================================== */
+
+/*
+   Les classes suivantes seront utilisees par notre
+   futur script JavaScript pour generer les articles.
+*/
+
+.article-card {
+
+    /* Couleur de categorie par defaut */
+    --article-accent: var(--accent);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+    padding: 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--article-accent);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    transition: var(--transition);
+
+    /* Evite les debordements de texte */
+    overflow-wrap: anywhere;
+}
+
+
+.article-card:hover {
+
+    background: var(--surface-hover);
+
+    border-color: var(--article-accent);
+
+    transform: translateY(-3px);
+
+    box-shadow: var(--glow);
+}
+
+
+/* Couleurs selon les categories */
+
+.article-card.security {
+    --article-accent: var(--accent);
+}
+
+.article-card.alert {
+    --article-accent: var(--danger);
+}
+
+.article-card.network {
+    --article-accent: var(--success);
+}
+
+.article-card.system {
+    --article-accent: var(--favorite);
+}
+
+
+/* Ligne contenant la source et la date */
+
+.article-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+
+.article-source {
+
+    color: var(--article-accent);
+
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: bold;
+
+    text-transform: uppercase;
+}
+
+
+.article-date {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+
+/* Titre de l'article */
+
+.article-title {
+
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+
+/* Resume de l'article */
+
+.article-summary {
+
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.7;
+
+    /*
+       Limite visuellement le resume a quatre lignes.
+       Le contenu complet reste disponible dans la source.
+    */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+
+    overflow: hidden;
+}
+
+
+/* Ligne contenant les etiquettes */
+
+.article-tags {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+/* Etiquettes de categorie et de langue */
+
+.article-tag {
+
+    padding: 4px 9px;
+
+    color: var(--text-secondary);
+    background: rgba(148, 163, 184, 0.07);
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    font-size: 0.7rem;
+}
+
+
+/* Pied de carte */
+
+.article-footer {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    /*
+       auto utilise l'espace restant.
+       Les pieds des cartes restent ainsi en bas,
+       meme si les resumes ont des longueurs differentes.
+    */
+    margin-top: auto;
+
+    padding-top: 15px;
+
+    border-top: 1px solid var(--border);
+}
+
+
+/* Lien vers la source originale */
+
+.article-link {
+
+    font-size: 0.82rem;
+    font-weight: 600;
+
+    color: var(--accent);
+}
+
+
+.article-link:hover {
+    color: var(--text);
+}
+
+
+/* Bouton d'ajout aux favoris */
+
+.favorite-button {
+
+    padding: 6px 12px;
+
+    color: var(--text-secondary);
+    background: transparent;
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    font-size: 1rem;
+
+    transition: var(--transition);
+}
+
+
+.favorite-button:hover,
+.favorite-button.active {
+
+    color: var(--favorite);
+    border-color: var(--favorite);
+
+    background: rgba(167, 139, 250, 0.08);
+}
+
+
+/* ==========================================================
+   13. MESSAGES DE CHARGEMENT ET D'ERREUR
+   ========================================================== */
+
+.loading-message,
+.empty-message,
+.error-message {
+
+    /* Occupe toute la largeur de la grille */
+    grid-column: 1 / -1;
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: var(--text-secondary);
+
+    background: var(--surface);
+
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+}
+
+
+.error-message {
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+
+/* ==========================================================
+   14. PAGINATION
+   ========================================================== */
+
+.pagination {
+
+    display: flex;
+    justify-content: center;
+
+    margin: 35px 0;
+}
+
+
+#load-more {
+
+    padding: 12px 25px;
+
+    color: var(--accent);
+    background: var(--surface);
+
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+
+    transition: var(--transition);
+}
+
+
+#load-more:hover {
+
+    color: var(--background);
+    background: var(--accent);
+}
+
+
+/* ==========================================================
+   15. PIED DE PAGE
+   ========================================================== */
+
+.footer {
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    color: var(--text-secondary);
+
+    background: rgba(8, 14, 25, 0.9);
+
+    border-top: 1px solid var(--border);
+
+    font-size: 0.78rem;
+}
+
+
+.footer p {
+    margin-bottom: 8px;
+}
+
+
+.footer-brand {
+
+    font-family: var(--font-tech);
+    color: var(--accent);
+
+    letter-spacing: 2px;
+}
+
+
+.footer a {
+
+    display: inline-block;
+
+    margin-top: 10px;
+}
+
+
+/* ==========================================================
+   16. ADAPTATION AUX TABLETTES
+   ========================================================== */
+
+/*
+   @media applique des regles conditionnelles.
+
+   max-width: 1100px :
+   applique ces modifications lorsque la largeur
+   de l'ecran est inferieure ou egale a 1100 pixels.
+*/
+
+@media (max-width: 1100px) {
+
+    .toolbar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #search-input {
+        grid-column: 1 / -1;
+    }
+
+    .refresh-button {
+        width: 100%;
+    }
+}
+
+
+/* ==========================================================
+   17. ADAPTATION AUX SMARTPHONES
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    .header {
+        padding: 18px 15px;
+        flex-wrap: wrap;
+    }
+
+    .brand {
+        gap: 12px;
+    }
+
+    .radar-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .brand-text h1 {
+        letter-spacing: 2px;
+    }
+
+    .brand-text p {
+        font-size: 0.58rem;
+        letter-spacing: 0.5px;
+    }
+
+    .system-status {
+        font-size: 0.65rem;
+        padding: 6px 10px;
+    }
+
+    .navigation {
+
+        /* Aligne le menu a gauche pour le defilement */
+        justify-content: flex-start;
+
+        gap: 5px;
+        padding: 10px;
+    }
+
+    .nav-button {
+        padding: 10px 15px;
+        font-size: 0.75rem;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    /* Deux compteurs par ligne sur smartphone */
+    .dashboard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-label {
+        font-size: 0.68rem;
+    }
+
+    .stat-value {
+        font-size: 1.8rem;
+    }
+
+    .toolbar {
+        gap: 8px;
+    }
+
+    .toolbar input,
+    .toolbar select,
+    .refresh-button {
+
+        /*
+           16px evite notamment le zoom automatique
+           de Safari iOS lors de la saisie.
+        */
+        font-size: 16px;
+
+        padding: 12px 10px;
+    }
+
+    /* Une seule carte par ligne sur smartphone */
+    .articles-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .article-card {
+        padding: 16px;
+    }
+
+    .feed-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+/* Adaptation supplementaire aux petits smartphones */
+
+@media (max-width: 380px) {
+
+    .toolbar {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-label {
+        letter-spacing: 0.5px;
+    }
+
+    .brand-text h1 {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* ==========================================================
+   18. ACCESSIBILITE ET REDUCTION DES ANIMATIONS
+   ========================================================== */
+
+/*
+   Respecte les preferences des utilisateurs ayant
+   active la reduction des mouvements sur leur appareil.
+
+   Permet egalement de limiter les animations
+   lorsque celles-ci sont indesirables.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* ==========================================================
+   FIN DE LA FEUILLE DE STYLE NOVAWATCH
+   ========================================================== */

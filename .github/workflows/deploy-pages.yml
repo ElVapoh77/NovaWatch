@@ -1,27 +1,29 @@
 
 # ============================================================
 # NOVAWATCH - Publication automatique du site
-# Version : 0.2
+# Version : 0.3.1
+#
+# Correction :
+# - Separation de la preparation et du deploiement.
+# - Integration des fichiers PWA.
+# - Verification de la presence des icones.
 # ============================================================
 
 name: NovaWatch - Pages Deployment
 
 
 # ============================================================
-# 1. DÉCLENCHEURS DU DÉPLOIEMENT
+# 1. DECLENCHEURS
 # ============================================================
 
 on:
 
-  # Déploie le site après une modification de la branche main.
+  # Publication apres modification de la branche main.
   push:
     branches:
       - main
 
-  # Déploie le site après la fin du collecteur RSS.
-  #
-  # Permet de publier automatiquement les nouveaux articles,
-  # même lorsque le commit est effectué par le robot GitHub.
+  # Publication apres execution du collecteur RSS.
   workflow_run:
     workflows:
       - "NovaWatch - RSS Collector"
@@ -30,7 +32,7 @@ on:
     branches:
       - main
 
-  # Autorise également un déploiement manuel.
+  # Autorise une publication manuelle.
   workflow_dispatch:
 
 
@@ -40,107 +42,122 @@ on:
 
 permissions:
 
-  # Autorise la lecture des fichiers du dépôt.
+  # Lecture du contenu du depot.
   contents: read
 
-  # Autorise la publication sur GitHub Pages.
+  # Autorisation de publication sur GitHub Pages.
   pages: write
 
-  # Autorise l'authentification sécurisée du déploiement
-  # via un jeton temporaire OIDC (OpenID Connect).
+  # Authentification securisee via OpenID Connect.
   id-token: write
 
 
 # ============================================================
-# 3. GESTION DES DÉPLOIEMENTS SIMULTANÉS
+# 3. GESTION DES EXECUTIONS SIMULTANEES
 # ============================================================
 
 concurrency:
 
-  # Tous les déploiements appartiennent au même groupe.
+  # Groupe commun a tous les deploiements NovaWatch.
   group: novawatch-pages
 
-  # Ne pas interrompre un déploiement déjà en cours.
+  # Ne pas interrompre une publication en cours.
   cancel-in-progress: false
 
 
 # ============================================================
-# 4. TÂCHE DE DÉPLOIEMENT
+# 4. PREPARATION DU SITE - JOB BUILD
 # ============================================================
 
 jobs:
 
-  deploy:
+  build:
 
-    name: Publication de NovaWatch
+    name: Preparation de NovaWatch
 
-    # Si le déploiement est déclenché par le collecteur RSS,
-    # vérifie que celui-ci s'est terminé avec succès.
-    #
-    # Les déclenchements manuels et les commits classiques
-    # restent également autorisés.
+    # Ne publie pas le site si le collecteur RSS a echoue.
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
 
-    # Machine virtuelle temporaire fournie par GitHub.
+    # Machine Linux temporaire fournie par GitHub.
     runs-on: ubuntu-latest
 
-    # Durée maximale du déploiement en minutes.
+    # Duree maximale de la tache en minutes.
     timeout-minutes: 10
-
-    environment:
-
-      # Environnement officiel de GitHub Pages.
-      name: github-pages
-
-      # Récupère automatiquement l'adresse du site publié.
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
 
-      # ======================================================
-      # 5. RÉCUPÉRATION DES FICHIERS
-      # ======================================================
-
+      # Recuperation de la derniere version du depot.
       - name: Recuperation du depot
         uses: actions/checkout@v6
 
         with:
 
-          # Récupère la dernière version de main,
-          # comprenant les derniers articles collectés.
+          # Recupere les fichiers de la branche main.
           ref: main
 
 
-      # ======================================================
-      # 6. CONFIGURATION DE GITHUB PAGES
-      # ======================================================
-
+      # Configuration de GitHub Pages.
       - name: Configuration de GitHub Pages
         uses: actions/configure-pages@v5
 
 
       # ======================================================
-      # 7. PRÉPARATION DES FICHIERS DU SITE
+      # 5. PREPARATION DES FICHIERS
       # ======================================================
 
       - name: Preparation du site
 
         run: |
-          # Création du dossier temporaire de publication.
+          # Creation du dossier temporaire.
           mkdir -p _site/data
 
-          # Copie de la page HTML principale.
+          # Copie de la page principale.
           cp index.html _site/
 
-          # Copie des feuilles CSS et scripts JavaScript.
+          # Copie du CSS, du JavaScript et des icones.
+          # -r : copie recursive des sous-dossiers.
           cp -r assets _site/
 
-          # Copie des articles collectés.
+          # Copie des articles collectes.
           cp data/articles.json _site/data/
+
+          # Copie de la configuration PWA.
+          cp manifest.json _site/
+
+          # Copie du gestionnaire de cache hors connexion.
+          cp service-worker.js _site/
 
 
       # ======================================================
-      # 8. CRÉATION DE L'ARTEFACT
+      # 6. VERIFICATION DES FICHIERS
+      # ======================================================
+
+      - name: Verification des ressources
+
+        run: |
+          # test -s verifie que le fichier existe
+          # et que sa taille est superieure a zero.
+          #
+          # Si un fichier est absent, la tache echoue
+          # avant de publier une application incomplete.
+
+          test -s _site/index.html
+          test -s _site/manifest.json
+          test -s _site/service-worker.js
+          test -s _site/data/articles.json
+          test -s _site/assets/css/style.css
+          test -s _site/assets/js/app.js
+          test -s _site/assets/icons/icon-192.png
+          test -s _site/assets/icons/icon-512.png
+          test -s _site/assets/icons/icon-maskable.png
+          test -s _site/assets/icons/apple-touch-icon.png
+          test -s _site/assets/icons/favicon.png
+
+          echo "Toutes les ressources sont presentes."
+
+
+      # ======================================================
+      # 7. CREATION DE L'ARTEFACT
       # ======================================================
 
       - name: Creation de l artefact
@@ -148,19 +165,51 @@ jobs:
 
         with:
 
-          # Dossier contenant uniquement les fichiers
-          # nécessaires au fonctionnement du site.
+          # Nom attendu par GitHub Pages.
+          name: github-pages
+
+          # Dossier contenant les fichiers a publier.
           path: "_site"
 
 
-      # ======================================================
-      # 9. PUBLICATION SUR INTERNET
-      # ======================================================
+  # ==========================================================
+  # 8. PUBLICATION DU SITE - JOB DEPLOY
+  # ==========================================================
+
+  deploy:
+
+    name: Publication de NovaWatch
+
+    # IMPORTANT :
+    # Attend la reussite complete du job build.
+    # Le deploiement ne peut donc pas commencer
+    # pendant la creation de l'artefact.
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    environment:
+
+      # Environnement officiel GitHub Pages.
+      name: github-pages
+
+      # Adresse du site apres publication.
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
 
       - name: Deploiement de NovaWatch
 
-        # Identifiant utilisé pour récupérer l'URL du site.
+        # Identifiant permettant de recuperer
+        # les informations du deploiement.
         id: deployment
 
-        # Action officielle de publication GitHub Pages.
+        # Action officielle de publication.
         uses: actions/deploy-pages@v4
+
+        with:
+
+          # Artefact genere par le job build.
+          artifact_name: github-pages

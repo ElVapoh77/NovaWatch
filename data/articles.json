@@ -1,5 +1,16 @@
 [
     {
+        "id": "85d71203b57ce129093e26eef12c5838087963fa80b6710b3da5958951dba1ae",
+        "title": "Palo Alto Networks warns of Fragnesia flaw exploited in PAN-OS attacks",
+        "link": "https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-fragnesia-flaw-exploited-in-pan-os-attacks/",
+        "summary": "Threat actors are chaining exploits for the PHP2Shell and Fragnesia vulnerabilities to target Palo Alto Networks devices with management interfaces exposed to the internet. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-25T22:05:09+00:00",
+        "collected_at": "2026-11-26T04:09:14.209848+00:00"
+    },
+    {
         "id": "29838573f890e4f70a254f98df5ae8e99d8b39aa142c53a06ff395446ca29511",
         "title": "1Password customer data stolen after employee GitHub account breach",
         "link": "https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/",

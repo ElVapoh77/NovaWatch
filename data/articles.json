@@ -1,5 +1,93 @@
 [
     {
+        "id": "ac6c22bfffe5cdc2a6ea45a3cc4d311d9e1d9d4b8cb590f766b2260c98a41ebb",
+        "title": "OpenAI warns GPT-6.2 Astra will hit usage limits 40% faster because it fixed a bug",
+        "link": "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-warns-gpt-62-astra-will-hit-usage-limits-40-percent-faster-because-it-fixed-a-bug/",
+        "summary": "OpenAI confirmed that it fixed a 'bug' that incorrectly discounted GPT-6.2 usage, which means you'll now hit GPT usage limits 40% faster than before. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-26T21:06:22+00:00",
+        "collected_at": "2026-11-26T22:59:11.902422+00:00"
+    },
+    {
+        "id": "0bd18f3d2e78de9a983976cdb512af1c7464cd542420f0a4d10e71e5f2fe6e27",
+        "title": "NordVPN Black Friday Deal: Get 78% off VPN plans in 2026",
+        "link": "https://www.bleepingcomputer.com/news/security/nordvpn-black-friday-deal-get-78-percent-off-vpn-plans-in-2026/",
+        "summary": "NordVPN's 2026 Black Friday and Cyber Monday deal is now live, offering savings of up to 78% on VPN subscriptions, plus three extra months of protection. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-26T17:58:42+00:00",
+        "collected_at": "2026-11-26T22:59:11.902430+00:00"
+    },
+    {
+        "id": "deebe28bb42d9ba3bda47a9eac8ddf84e5e222e7698f4b8b9fbb7c16ee4215e6",
+        "title": "Fake paid expert interviews impersonate brands to steal Google logins",
+        "link": "https://www.bleepingcomputer.com/news/apple/fake-paid-expert-interviews-impersonate-brands-to-steal-google-logins/",
+        "summary": "An ongoing phishing campaign dubbed \"GoodGuys\" impersonates major brands, including Google, Nvidia, Accenture, and SpaceX, to steal corporate Google and Okta credentials using fake invitations to paid expert interviews and webinars. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-26T17:15:27+00:00",
+        "collected_at": "2026-11-26T22:59:11.902435+00:00"
+    },
+    {
+        "id": "ca98847f296cf724c251b512a086122221a1792479bd8b54f461c175a8afd0db",
+        "title": "Black Friday TerraMaster : jusqu’à 30 % de remise sur les NAS et boîtiers de stockage sur Amazon",
+        "link": "https://www.it-connect.fr/bon-plan-terramaster-black-friday-2026/",
+        "summary": "<p>Black Friday TerraMaster : jusqu'au 30 novembre, NAS et boîtiers de stockage jusqu'à -30 % sur Amazon.fr. Le NAS F2-425 passe à 255,99 € au lieu de 319,99 €.</p>\n<p>Le post <a href=\"https://www.it-connect.fr/bon-plan-terramaster-black-friday-2026/\">Black Friday TerraMaster : jusqu’à 30 % de remise sur les NAS et boîtiers de stockage sur Amazon</a> a été publié sur <a href=\"https://www.it-connect.fr\">IT-Connect</a>.</p>",
+        "source": "IT-Connect",
+        "category": "Systèmes et réseaux",
+        "language": "fr",
+        "published": "2026-11-26T17:08:59+00:00",
+        "collected_at": "2026-11-26T22:59:11.827142+00:00"
+    },
+    {
+        "id": "53c975f6e8dba11f0547a52431c6bd12886387d71eb3d9182a1209e4e2c381b0",
+        "title": "AdGuard Home passe en version 1.0 : découvrez la nouvelle interface !",
+        "link": "https://www.it-connect.fr/adguard-home-1-0-nouvelle-interface-dns-cloudflare/",
+        "summary": "<p>AdGuard Home passe en version 1.0 avec une interface reconstruite et Cloudflare comme DNS par défaut à la place de Quad9. Voici ce qu'il faut savoir.</p>\n<p>Le post <a href=\"https://www.it-connect.fr/adguard-home-1-0-nouvelle-interface-dns-cloudflare/\">AdGuard Home passe en version 1.0 : découvrez la nouvelle interface !</a> a été publié sur <a href=\"https://www.it-connect.fr\">IT-Connect</a>.</p>",
+        "source": "IT-Connect",
+        "category": "Systèmes et réseaux",
+        "language": "fr",
+        "published": "2026-11-26T17:00:00+00:00",
+        "collected_at": "2026-11-26T22:59:11.827150+00:00"
+    },
+    {
+        "id": "4207d0228ac6ef83768c4d39deef3cf288f797125fa4e511956a037599d1a144",
+        "title": "Jusqu’à 50 navires piratés via des failles FortiGate : l’Iran soupçonné par les États-Unis",
+        "link": "https://www.it-connect.fr/navires-pirates-iran-fortigate/",
+        "summary": "<p>Pétroliers, méthanier : jusqu'à 50 navires auraient subi une cyberattaque via des pare-feu FortiGate non patchés. Washington soupçonne l'Iran.</p>\n<p>Le post <a href=\"https://www.it-connect.fr/navires-pirates-iran-fortigate/\">Jusqu’à 50 navires piratés via des failles FortiGate : l’Iran soupçonné par les États-Unis</a> a été publié sur <a href=\"https://www.it-connect.fr\">IT-Connect</a>.</p>",
+        "source": "IT-Connect",
+        "category": "Systèmes et réseaux",
+        "language": "fr",
+        "published": "2026-11-26T16:14:00+00:00",
+        "collected_at": "2026-11-26T22:59:11.827155+00:00"
+    },
+    {
+        "id": "57d73d788295d6a09683ff8b73ce39061d976f929414a54eab82058f3edbb722",
+        "title": "Remus malware steals Gmail messages via fake Google Sheets extension",
+        "link": "https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/",
+        "summary": "The Remus infostealer is stealing Gmail messages through a stealthy malicious Chrome extension, a capability the malware operators marketed as a zero-day exploit in Google's email service. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-26T15:23:28+00:00",
+        "collected_at": "2026-11-26T22:59:11.902439+00:00"
+    },
+    {
+        "id": "d1d180f8d0df56f65a983296220b8c9fb5f71e72df53b9bad1faccfc8dbf4165",
+        "title": "La FIFA confirme une cyberattaque : le Handsome Boy Hacking Club revendique le vol de données",
+        "link": "https://www.it-connect.fr/fifa-cyberattaque-handsome-boy-hacking-club-fuite-donnees/",
+        "summary": "<p>La FIFA confirme un vol de données personnelles et professionnelles, revendiqué par le Handsome Boy Hacking Club : voici ce que l'on sait.</p>\n<p>Le post <a href=\"https://www.it-connect.fr/fifa-cyberattaque-handsome-boy-hacking-club-fuite-donnees/\">La FIFA confirme une cyberattaque : le Handsome Boy Hacking Club revendique le vol de données</a> a été publié sur <a href=\"https://www.it-connect.fr\">IT-Connect</a>.</p>",
+        "source": "IT-Connect",
+        "category": "Systèmes et réseaux",
+        "language": "fr",
+        "published": "2026-11-26T15:22:58+00:00",
+        "collected_at": "2026-11-26T22:59:11.827159+00:00"
+    },
+    {
         "id": "34599e7b6c56f4b30a76be93b3a805fae68749d58fb9b09c345986abd0b8ff1f",
         "title": "SYS010 malware abuses browser management to spy on Gmail, Outlook",
         "link": "https://www.bleepingcomputer.com/news/security/sys010-malware-abuses-browser-management-to-spy-on-gmail-outlook/",
@@ -42,6 +130,83 @@
         "language": "fr",
         "published": "2026-11-26T05:17:49+00:00",
         "collected_at": "2026-11-26T13:53:03.448406+00:00"
+    },
+    {
+        "id": "7fd0ba16f450999b3af4569a3d64e25730b2318a819ca99cd27818655c2f308a",
+        "title": "Vulnérabilité dans Drupal (26 novembre 2026)",
+        "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1623/",
+        "summary": "Une vulnérabilité a été découverte dans Drupal. Elle permet à un attaquant de provoquer un contournement de la politique de sécurité. Drupal indique que la vulnérabilité CVE-2026-136716 est activement exploitée.",
+        "source": "CERT-FR",
+        "category": "Cybersécurité",
+        "language": "fr",
+        "published": "2026-11-26T00:00:00+00:00",
+        "collected_at": "2026-11-26T22:59:10.470538+00:00"
+    },
+    {
+        "id": "c623a51bdfabfec24391f331eef6ed98c5a6f568bcbce3ef44ce43fd327b6f19",
+        "title": "Multiples vulnérabilités dans GitLab (26 novembre 2026)",
+        "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1624/",
+        "summary": "De multiples vulnérabilités ont été découvertes dans GitLab. Certaines d'entre elles permettent à un attaquant de provoquer une exécution de code arbitraire à distance, un déni de service à distance et une atteinte à la confidentialité des données.",
+        "source": "CERT-FR",
+        "category": "Cybersécurité",
+        "language": "fr",
+        "published": "2026-11-26T00:00:00+00:00",
+        "collected_at": "2026-11-26T22:59:10.470541+00:00"
+    },
+    {
+        "id": "e3c79baaa6cdd2a63511a88bf8a4a44fde6b695acb8503d181658d3af13a6a10",
+        "title": "Multiples vulnérabilités dans les produits Tenable (26 novembre 2026)",
+        "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1625/",
+        "summary": "De multiples vulnérabilités ont été découvertes dans les produits Tenable. Certaines d'entre elles permettent à un attaquant de provoquer une exécution de code arbitraire à distance, une injection SQL (SQLi) et un contournement de la politique de sécurité.",
+        "source": "CERT-FR",
+        "category": "Cybersécurité",
+        "language": "fr",
+        "published": "2026-11-26T00:00:00+00:00",
+        "collected_at": "2026-11-26T22:59:10.470545+00:00"
+    },
+    {
+        "id": "e737a36dff9236d99f4cf923ac7408555435db499b185c755432c2b1f04849a7",
+        "title": "Multiples vulnérabilités dans les produits NetApp (26 novembre 2026)",
+        "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1626/",
+        "summary": "De multiples vulnérabilités ont été découvertes dans les produits NetApp. Certaines d'entre elles permettent à un attaquant de provoquer un déni de service à distance, une atteinte à la confidentialité des données et une atteinte à l'intégrité des données.",
+        "source": "CERT-FR",
+        "category": "Cybersécurité",
+        "language": "fr",
+        "published": "2026-11-26T00:00:00+00:00",
+        "collected_at": "2026-11-26T22:59:10.470549+00:00"
+    },
+    {
+        "id": "65696aed29f88f4376d00a6ac5544eaf3afbcd41494ad92fb76e842cd9d50ae5",
+        "title": "Vulnérabilité dans Mattermost Server (26 novembre 2026)",
+        "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1627/",
+        "summary": "Une vulnérabilité a été découverte dans Mattermost Server. Elle permet à un attaquant de provoquer un problème de sécurité non spécifié par l'éditeur.",
+        "source": "CERT-FR",
+        "category": "Cybersécurité",
+        "language": "fr",
+        "published": "2026-11-26T00:00:00+00:00",
+        "collected_at": "2026-11-26T22:59:10.470553+00:00"
+    },
+    {
+        "id": "27f22f0baf9808a00bcb98b8fd1f4a3474aa85e730338a86cb1139f42179be7d",
+        "title": "Multiples vulnérabilités dans HPE Aruba Networking Airwave (26 novembre 2026)",
+        "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1628/",
+        "summary": "De multiples vulnérabilités ont été découvertes dans HPE Aruba Networking Airwave. Certaines d'entre elles permettent à un attaquant de provoquer une exécution de code arbitraire à distance, une élévation de privilèges et un déni de service à distance.",
+        "source": "CERT-FR",
+        "category": "Cybersécurité",
+        "language": "fr",
+        "published": "2026-11-26T00:00:00+00:00",
+        "collected_at": "2026-11-26T22:59:10.470557+00:00"
+    },
+    {
+        "id": "5e7ef1a73add266be9f41e8fb0cbd8adfcbf489f291c5646a93092f3d6728bee",
+        "title": "Multiples vulnérabilités dans les produits Veeam (26 novembre 2026)",
+        "link": "https://www.cert.cyber.gouv.fr/avis/CERTFR-2026-AVI-1629/",
+        "summary": "De multiples vulnérabilités ont été découvertes dans les produits Veeam. Elles permettent à un attaquant de provoquer une exécution de code arbitraire à distance. L'éditeur fournit également une mesure de contournement provisoire.",
+        "source": "CERT-FR",
+        "category": "Cybersécurité",
+        "language": "fr",
+        "published": "2026-11-26T00:00:00+00:00",
+        "collected_at": "2026-11-26T22:59:10.470560+00:00"
     },
     {
         "id": "85d71203b57ce129093e26eef12c5838087963fa80b6710b3da5958951dba1ae",

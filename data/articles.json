@@ -1,5 +1,71 @@
 [
     {
+        "id": "76470ba711a6bf05ce991e629e7500db1d747193024d783ba034e7a4684216e6",
+        "title": "VMware ESXi et Proxmox VE : des ransomwares déployés avec des identifiants mal protégés",
+        "link": "https://www.it-connect.fr/blacknevas-ransomware-vmware-esxi-vcenter/",
+        "summary": "<p>BlackNevas et The Gentlemen ont frappé des hyperviseurs VMware ESXi et Proxmox VE avec de simples identifiants volés ou stockés au mauvais endroit.</p>\n<p>Le post <a href=\"https://www.it-connect.fr/blacknevas-ransomware-vmware-esxi-vcenter/\">VMware ESXi et Proxmox VE : des ransomwares déployés avec des identifiants mal protégés</a> a été publié sur <a href=\"https://www.it-connect.fr\">IT-Connect</a>.</p>",
+        "source": "IT-Connect",
+        "category": "Systèmes et réseaux",
+        "language": "fr",
+        "published": "2026-11-27T19:45:50+00:00",
+        "collected_at": "2026-11-27T23:27:01.195641+00:00"
+    },
+    {
+        "id": "dfa374b101675a2c73711b49319bb68288c5a2546cb9d48af21f1cecdbdfc894",
+        "title": "pCloud confirms password manager hack after suspicious login alerts",
+        "link": "https://www.bleepingcomputer.com/news/security/pcloud-confirms-password-manager-hack-after-suspicious-login-alerts/",
+        "summary": "The pCloud Pass password manager suffered a cyberattack, with users reporting that unknown devices had connected to their accounts even with two-factor authentication (2FA) enabled. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-27T19:26:04+00:00",
+        "collected_at": "2026-11-27T23:27:01.370185+00:00"
+    },
+    {
+        "id": "0d3b0b5ebdba7f87505e197b86938d2b3f954b0a4636a3cd3a5e1e852fdcf80a",
+        "title": "New Boston Scientific data breach exposes personal, medical info",
+        "link": "https://www.bleepingcomputer.com/news/security/new-boston-scientific-data-breach-exposes-personal-medical-info/",
+        "summary": "Medical technology company Boston Scientific is sending data breach notices to individuals affected by a cyberattack on the firm. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-27T18:57:42+00:00",
+        "collected_at": "2026-11-27T23:27:01.370199+00:00"
+    },
+    {
+        "id": "9064d3864e250d5015b79ab019a49dc2ef4503f6d4b69ae59f7355312f11a36c",
+        "title": "Unpatched Cacti zero-day with public PoC gives remote code execution",
+        "link": "https://www.bleepingcomputer.com/news/security/unpatched-cacti-zero-day-with-public-poc-gives-remote-code-execution/",
+        "summary": "A zero-day vulnerability in the Cacti network monitoring platform has been publicly disclosed, along with a proof-of-concept exploit that lets unauthenticated attackers execute commands on vulnerable servers. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-27T17:06:13+00:00",
+        "collected_at": "2026-11-27T23:27:01.370208+00:00"
+    },
+    {
+        "id": "6daa1a23e861f5b9f49aed41c12dfe0c807ab08e8b31995e543843cd63e3dae1",
+        "title": "Windows Server 2025 : Microsoft corrige en urgence un bug d’écran bleu lié à la mise à jour de novembre",
+        "link": "https://www.it-connect.fr/windows-server-2025-kb5138318-hotpatch-ecran-bleu/",
+        "summary": "<p>KB5138318 : Microsoft a corrigé en urgence les écrans bleus de la mort (erreur 0x139) causés par le hotpatch de novembre 2026 sur Windows Server 2025.</p>\n<p>Le post <a href=\"https://www.it-connect.fr/windows-server-2025-kb5138318-hotpatch-ecran-bleu/\">Windows Server 2025 : Microsoft corrige en urgence un bug d’écran bleu lié à la mise à jour de novembre</a> a été publié sur <a href=\"https://www.it-connect.fr\">IT-Connect</a>.</p>",
+        "source": "IT-Connect",
+        "category": "Systèmes et réseaux",
+        "language": "fr",
+        "published": "2026-11-27T16:38:46+00:00",
+        "collected_at": "2026-11-27T23:27:01.195655+00:00"
+    },
+    {
+        "id": "0b5d82f7ad3e712fc950e7e6484a3796bda04c1dc7166d3bd07f9ab8e39980f7",
+        "title": "US Air Force cloud platform reportedly hacked in latest federal breach",
+        "link": "https://www.bleepingcomputer.com/news/security/us-air-force-cloud-platform-reportedly-hacked-in-latest-federal-breach/",
+        "summary": "Hackers have reportedly breached the US Air Force's Cloud One computing platform, adding to a recent wave of cyberattacks affecting US government agencies, including the FBI, CIA, and Treasury Department. [...]",
+        "source": "BleepingComputer",
+        "category": "Cybersécurité",
+        "language": "en",
+        "published": "2026-11-27T15:09:40+00:00",
+        "collected_at": "2026-11-27T23:27:01.370216+00:00"
+    },
+    {
         "id": "dc95b561cad3799f329267ea6053df1d72a5eb6e768738cc5206e9ec84872470",
         "title": "Your Firewall Isn't Enough: The Hidden Risk of Unmanaged VMs",
         "link": "https://www.bleepingcomputer.com/news/security/your-firewall-isnt-enough-the-hidden-risk-of-unmanaged-vms/",
